@@ -22,6 +22,8 @@ public class Role implements SimpleBean {
 
     public String name;
 
+    public String nickname;
+
     public String describe;
 
     public Integer status;

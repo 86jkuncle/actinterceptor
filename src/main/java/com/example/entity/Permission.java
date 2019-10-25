@@ -17,9 +17,7 @@ public class Permission implements SimpleBean {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer id;
 
-    public Integer pid;
-
-    public String permissionId;
-
     public String permissionName;
+
+    public String permissionDesc;
 }

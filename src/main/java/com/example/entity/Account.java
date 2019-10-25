@@ -41,11 +41,11 @@ public class Account implements SimpleBean {
 
     public Integer deleted;
 
-    public List<Role> role;
+    public Role role;
 
     public interface Mapper extends BaseMapper<Account>{
-        List<Account> selectUser(String username);
-        List<Role> selectUserRole(Integer userId);
+        Account selectUser(String username);
+        Role selectUserRole(Integer userId);
     }
 
 }
