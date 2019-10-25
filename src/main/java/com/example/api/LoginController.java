@@ -3,6 +3,7 @@ package com.example.api;
 import act.db.beetlsql.BeetlSqlTransactional;
 import com.example.entity.Account;
 import com.example.entity.User;
+import com.example.mapper.AccountMapper;
 import org.beetl.sql.core.query.Query;
 import org.osgl.logging.LogManager;
 import org.osgl.logging.Logger;
@@ -26,7 +27,7 @@ public class LoginController {
     private User.Mapper mapper;
 
     @Inject
-    private Account.Mapper actMapper;
+    private AccountMapper actMapper;
 
     @PostAction("/login")
     public Map<String,Object> login(String username,String password){

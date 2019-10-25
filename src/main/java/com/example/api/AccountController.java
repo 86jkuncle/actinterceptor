@@ -12,8 +12,8 @@ import com.example.entity.Account;
 import com.example.entity.Permission;
 import com.example.entity.Permissions;
 import com.example.entity.Role;
+import com.example.mapper.AccountMapper;
 import org.osgl.$;
-import org.osgl.aaa.RequireAuthentication;
 import org.osgl.http.H;
 import org.osgl.http.Http;
 import org.osgl.mvc.annotation.GetAction;
@@ -29,11 +29,10 @@ import java.util.stream.Collectors;
  */
 @UrlContext("/account")
 @With(BeetlSqlTransactional.class)
-@RequireAuthentication
 public class AccountController extends Controller.Util {
 
     @Inject
-    private Account.Mapper mapper;
+    private AccountMapper mapper;
     @Inject
     private Permissions.Mapper pmsMapper;
     @Inject
@@ -45,7 +44,7 @@ public class AccountController extends Controller.Util {
      * @return
      */
     @GetAction("userinfo")
-    public void index(@DefaultValue("admin") String username){
+    public UserVO index(@DefaultValue("admin") String username){
         List<Permissions> permissions = pmsMapper.selectPermissions(username);
 
         Map<String,List<Permissions>> pmap = permissions.parallelStream().collect(
@@ -63,7 +62,7 @@ public class AccountController extends Controller.Util {
         userVO.setRoleId(role.name);
         userVO.setRoleVo(roleVO);
 
-        renderJson(userVO);
+        return userVO;
 //        Map<String,List<PermissionVO>> permissionVoMap = new HashMap<>(16);
 //        permissionVoMap.put("permissions",permissionVOList);
 //        System.out.println("contextPaht:"+request.contextPath());

@@ -1,6 +1,8 @@
 package com.example.entity;
 
+import act.Act;
 import act.util.SimpleBean;
+import com.example.security.UserLinked;
 import org.beetl.sql.core.mapper.BaseMapper;
 
 import javax.persistence.*;
@@ -12,7 +14,7 @@ import java.util.List;
  * @date 2019/10/18 14:29
  */
 @Entity
-public class Account implements SimpleBean {
+public class Account implements SimpleBean, UserLinked {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer id;
@@ -43,9 +45,18 @@ public class Account implements SimpleBean {
 
     public Role role;
 
-    public interface Mapper extends BaseMapper<Account>{
-        Account selectUser(String username);
-        Role selectUserRole(Integer userId);
+    @Override
+    public String userId() {
+        return this.username;
     }
+
+    public void setPassword(String password){
+        this.password = Act.crypto().passwordHash(password);
+    }
+
+    public boolean verifyPassword(char[] password){
+        return Act.crypto().verifyPassword(password,this.password);
+    }
+
 
 }

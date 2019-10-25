@@ -1,7 +1,6 @@
 package com.example.entity;
 
 import act.Act;
-import act.aaa.PasswordVerifier;
 import act.util.SimpleBean;
 import org.beetl.sql.core.mapper.BaseMapper;
 
@@ -26,7 +25,6 @@ public class User implements SimpleBean {
 
     private String status;
 
-    @PasswordVerifier
     public boolean verifyPassword(char[] password) {
         return Act.crypto().verifyPassword(password, this.password);
     }
