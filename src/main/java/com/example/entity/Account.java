@@ -50,13 +50,5 @@ public class Account implements SimpleBean, UserLinked {
         return this.username;
     }
 
-    public void setPassword(String password){
-        this.password = Act.crypto().passwordHash(password);
-    }
-
-    public boolean verifyPassword(char[] password){
-        return Act.crypto().verifyPassword(password,this.password);
-    }
-
 
 }

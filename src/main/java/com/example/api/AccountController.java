@@ -13,6 +13,7 @@ import com.example.entity.Permission;
 import com.example.entity.Permissions;
 import com.example.entity.Role;
 import com.example.mapper.AccountMapper;
+import com.example.mapper.PermissionsMapper;
 import org.osgl.$;
 import org.osgl.http.H;
 import org.osgl.http.Http;
@@ -34,12 +35,12 @@ public class AccountController extends Controller.Util {
     @Inject
     private AccountMapper mapper;
     @Inject
-    private Permissions.Mapper pmsMapper;
+    private PermissionsMapper pmsMapper;
     @Inject
     private H.Request request;
 
     /**
-     * 获取用户信息
+     * 根据用户名获取用户信息
      * @param username 用户名
      * @return
      */
@@ -63,26 +64,35 @@ public class AccountController extends Controller.Util {
         userVO.setRoleVo(roleVO);
 
         return userVO;
-//        Map<String,List<PermissionVO>> permissionVoMap = new HashMap<>(16);
-//        permissionVoMap.put("permissions",permissionVOList);
-//        System.out.println("contextPaht:"+request.contextPath());
-//        System.out.println(request.fullPath());
-//        System.out.println("ip:"+request.ip());
-//        System.out.println(request.host());
     }
 
+    /**
+     * 转换为VO对象
+     * @param role
+     * @return
+     */
     private RoleVO convertRole(Role role){
         RoleVO roleVO = new RoleVO();
         $.copy(role).mapHead("name").to("id").to(roleVO);
         return roleVO;
     }
 
+    /**
+     * 转换为VO对象
+     * @param account
+     * @return
+     */
     private UserVO convertUser(Account account){
         UserVO userVO = new UserVO();
         $.copy(account).to(userVO);
         return userVO;
     }
 
+    /**
+     * 转换VO
+     * @param stringListMap
+     * @return
+     */
     private List<PermissionVO> convertPermissions(Map<String,List<Permissions>> stringListMap){
         List<PermissionVO> permissionVOList = new ArrayList<>();
         for(Map.Entry<String,List<Permissions>> entry:stringListMap.entrySet()){

@@ -4,6 +4,7 @@ import act.controller.Controller;
 import act.controller.annotation.UrlContext;
 import act.db.beetlsql.BeetlSqlTransactional;
 import com.example.entity.Demo;
+import com.example.mapper.DemoMapper;
 import org.osgl.mvc.annotation.GetAction;
 import org.osgl.mvc.annotation.With;
 
@@ -20,7 +21,7 @@ import java.util.Map;
 @With(BeetlSqlTransactional.class)
 public class DemoController {
     @Inject
-    private Demo.Mapper mapper;
+    private DemoMapper mapper;
 
     @GetAction("list")
     public Map<String,Object> list(){

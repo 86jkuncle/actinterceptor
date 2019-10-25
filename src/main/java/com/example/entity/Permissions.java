@@ -18,9 +18,6 @@ public class Permissions extends TailBean  {
     private String action;
     private String describe;
 
-    public interface Mapper extends BaseMapper<Permissions>{
-        List<Permissions> selectPermissions(String username);
-    }
 
     public Integer getId() {
         return id;
