@@ -14,7 +14,7 @@ import java.util.List;
  * @date 2019/10/18 14:29
  */
 @Entity
-public class Account implements SimpleBean, UserLinked {
+public class Account implements SimpleBean{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer id;
@@ -44,11 +44,5 @@ public class Account implements SimpleBean, UserLinked {
     public Integer deleted;
 
     public Role role;
-
-    @Override
-    public String userId() {
-        return this.username;
-    }
-
 
 }

@@ -12,19 +12,19 @@ import javax.persistence.*;
  * @date 2019/10/16 15:06
  */
 @Entity
-public class User implements SimpleBean, UserLinked {
+public class User implements SimpleBean{
 
 
-    private Integer id;
+    public Integer id;
 
 
-    private String username;
+    public String username;
 
 
-    private String password;
+    public String password;
 
 
-    private String status;
+    public String status;
 
     public void setPassword(String password) {
         this.password = Act.crypto().passwordHash(password);
@@ -32,10 +32,5 @@ public class User implements SimpleBean, UserLinked {
 
     public boolean verifyPassword(char[] password) {
         return Act.crypto().verifyPassword(password, this.password);
-    }
-
-    @Override
-    public String userId() {
-        return this.username;
     }
 }
